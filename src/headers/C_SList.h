@@ -7,8 +7,8 @@
 typedef struct  
 {
     size_t size;
-    S_Node *head;
-    S_Node *tail;
+    C_S_Node *head;
+    C_S_Node *tail;
 }C_SList;
 
 

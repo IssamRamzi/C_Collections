@@ -19,40 +19,61 @@ C_SList *C_SList_create(){
     return list;
 }
 
-void C_SList_free(C_SList *list){
-    if(list == NULL) return;
+enum C_COMMON C_SList_free(C_SList *list){
+    if(list == NULL) return C_OK;
 
-    S_Node *node = list->head;
+    C_S_Node *node = list->head;
     while (node != NULL)
     {
-        S_Node *next = node->next;
+        C_S_Node *next = node->next;
         free(node);
         node = next;
     }
     free(list);
+    return C_OK;
 }
 
 
 enum C_COMMON C_SList_add_First(C_SList *list,void *data){
-    S_Node *head = (S_Node *)malloc(sizeof(S_Node));
+    C_S_Node *head = (C_S_Node *)malloc(sizeof(C_S_Node));
     if(head == NULL){
         printf("Error adding node to the linkedlist !");
-        return C_ERROR;
+        return C_ERR_ALLOC;
     }
     head->data = data;
     head->next = list->head;
     list->head = head;
     if(list->tail == NULL) list->tail = head;
     list->size+=1;
+    return C_OK;
 }
 
+enum C_COMMON C_SList_add_at(C_SList *list, void *data, size_t index){
+    if(index > list->size) return C_ERR_OUT_OF_RANGE;
+    C_S_Node *node = (C_S_Node *)malloc(sizeof(C_S_Node));
+    if(node == NULL){
+        printf("Error adding node to the linkedlist !");
+        return C_ERR_ALLOC;
+    }
+    node->data = data;
+    C_S_Node *curr = list->head;
+    for(int i = 0; i < index; i++){
+        curr = curr->next;
+    }
+    node->next = curr->next;
+    curr->next = node;
+    return C_OK;
+}
 
+enum C_COMMON   C_SList_add_all(C_SList *list1, C_SList *list2){
+    if(list2 == NULL) return C_OK;
+}
 
-void C_SList_add_Last(C_SList *list,void *data){
-    S_Node *tail = (S_Node *)malloc(sizeof(S_Node));
+enum C_COMMON C_SList_add_Last(C_SList *list,void *data){
+    C_S_Node *tail = (C_S_Node *)malloc(sizeof(C_S_Node));
     if(tail == NULL){
         printf("Error adding node to the linkedlist !");
-        return NULL;
+        return C_ERR_ALLOC;
     }
     
     tail->data = data;
@@ -65,6 +86,6 @@ void C_SList_add_Last(C_SList *list,void *data){
         list->head = tail;
     }
     list->size+=1;
-
+    return C_OK;
 }
 
