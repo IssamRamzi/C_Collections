@@ -90,11 +90,33 @@ enum C_COMMON C_SList_add_Last(C_SList *list,void *data){
 }
 
 enum C_COMMON   C_SList_remove_First    (C_SList *list){
-    if(list->head == NULL) return C_OK;
+    if(list->head == NULL) return C_ERR_OUT_OF_RANGE;
     C_S_Node *head = list->head;
     list->head = list->head->next;
     free(head);
+    return C_OK;
 }
+
+enum C_COMMON   C_SList_remove_Last     (C_SList *list){
+    if(list == NULL) return C_ERR_OUT_OF_RANGE;
+    C_S_Node *curr = list->head;
+    while (curr->next->next != NULL) curr = curr->next;
+    free(curr->next);
+    curr->next = NULL;
+    return C_OK;
+}
+
+enum C_COMMON   C_SList_remove_at       (C_SList *list, int index){
+    if(index > list->size) return C_ERR_OUT_OF_RANGE;
+    if(index == 0) C_SList_remove_First(list);
+    int i = 0;
+    C_S_Node *curr = list->head;
+    while (i < index){
+        curr = curr->next;
+    }
+    
+}
+
 
 
 

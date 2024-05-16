@@ -26,7 +26,7 @@ enum C_COMMON   C_SList_add_Last        (C_SList *list,void *data);
 
 enum C_COMMON   C_SList_remove_First    (C_SList *list);
 enum C_COMMON   C_SList_remove_Last     (C_SList *list);
-enum C_COMMON   C_SList_remove_at       (C_SList *list);
+enum C_COMMON   C_SList_remove_at       (C_SList *list, int index);
 enum C_COMMON   C_SList_remove_value    (C_SList *list, void *data);
 enum C_COMMON   C_SList_remove_all      (C_SList *list, C_SList *list2);
 enum C_COMMON   C_SList_remove_all_at   (C_SList *list, C_SList *list2, size_t index);
