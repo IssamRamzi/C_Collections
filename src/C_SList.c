@@ -89,3 +89,32 @@ enum C_COMMON C_SList_add_Last(C_SList *list,void *data){
     return C_OK;
 }
 
+enum C_COMMON   C_SList_remove_First    (C_SList *list){
+    if(list->head == NULL) return C_OK;
+    C_S_Node *head = list->head;
+    list->head = list->head->next;
+    free(head);
+}
+
+
+
+
+
+
+
+
+enum C_COMMON   C_SList_print           (C_SList *list){
+    if(list == NULL){
+        printf("\n");
+        return C_OK;
+    }
+    
+    while (true)
+    {
+        
+    }
+    
+
+}
+
+

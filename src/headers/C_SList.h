@@ -1,6 +1,7 @@
 #ifndef C_SLIST_H
 #define C_SLIST_H
 
+#include <stdbool.h>
 
 #include "common.h"
 
@@ -40,6 +41,7 @@ size_t          C_SList_contains_all    (C_SList *list,C_SList *list2);
 
 void            C_SList_reverse         (C_SList *list);
 // void            C_SList_sort(C_SList *list);
+enum C_COMMON   C_SList_print           (C_SList *list);
 
 
 
